@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ResultPage extends StatefulWidget {
-
-  const ResultPage({Key? key, required this.title, required this.height, required this.weight, required this.age})
+  const ResultPage(
+      {Key? key,
+      required this.title,
+      required this.height,
+      required this.weight,
+      required this.age})
       : super(key: key);
 
   final String title;
@@ -15,7 +19,6 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-
   double getBMI() {
     double heightM = widget.height.toDouble() / 100.0;
     double result = (widget.weight.toDouble() / (heightM * heightM));
@@ -75,11 +78,12 @@ class _ResultPageState extends State<ResultPage> {
                 alignment: Alignment.center,
                 width: double.infinity,
                 padding: const EdgeInsets.all(10),
-                child: Text(getBmiMeasure(bmi),
-                  style: const TextStyle(
+                child: Text(
+                  getBmiMeasure(bmi),
+                  style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green),
+                      color: getBmiTextColor(bmi)),
                 ),
               ),
               Container(
@@ -107,27 +111,41 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   String getBmiMeasure(double bmi) {
-    if(bmi > 18.5) {
+    if (bmi < 18.5) {
       return "UNDERWEIGHT";
-    } else if(bmi > 22.9) {
+    } else if (bmi < 22.9) {
       return "NORMAL";
-    } else if(bmi < 24.9) {
+    } else if (bmi < 24.9) {
       return "NORMAL";
-    } else if(bmi < 29.9) {
+    } else if (bmi < 29.9) {
       return "OVERWEIGHT";
     } else {
       return "OVERWEIGHT";
     }
   }
 
+  Color getBmiTextColor(double bmi) {
+    if (bmi < 18.5) {
+      return Colors.yellow;
+    } else if (bmi < 22.9) {
+      return Colors.green;
+    } else if (bmi < 24.9) {
+      return Colors.green;
+    } else if (bmi < 29.9) {
+      return Colors.red;
+    } else {
+      return Colors.red;
+    }
+  }
+
   String getBmiSuggestion(double bmi) {
-    if(bmi > 18.5) {
+    if (bmi < 18.5) {
       return "You have a lower than normal body weight. You can eat a bit more.";
-    } else if(bmi > 22.9) {
+    } else if (bmi < 22.9) {
       return "You have a normal body weight. Good job!";
-    } else if(bmi < 24.9) {
+    } else if (bmi < 24.9) {
       return "You have a normal body weight. Good job!";
-    } else if(bmi < 29.9) {
+    } else if (bmi < 29.9) {
       return "You have a higher than normal body weight. Try to exercise more.";
     } else {
       return "You have a higher than normal body weight. Try to exercise more.";
